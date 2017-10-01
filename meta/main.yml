@@ -1,11 +1,11 @@
 galaxy_info:
   author: Denis Gasparin
   description: |
-               Provides four new ansible modules for Postgresql:
-               - pgsql_table: ensure that a table is present (or absent) in database
-               - pgsql_row: ensure that a row is present (or absent) in a table
-               - pgsql_query: execute an arbitrary query in database and return results
-               - pgsql_command: execute an arbitrary query in database
+                Provides four ansible Postgresql modules:
+                 - pgsql_table: ensure table presence or absence
+                 - pgsql_row: ensure row is present (or absent) in a table
+                 - pgsql_query: exec an arbitrary query and return results
+                 - pgsql_command: exec an arbitrary query
   company: Smart Solutions
   license: BSD
 
