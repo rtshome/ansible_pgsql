@@ -6,6 +6,8 @@ Provides four new ansible modules for Postgresql:
   - pgsql_row: ensure that a row is present (or absent) in a table
   - pgsql_query: execute an arbitrary query in database and return results
   - pgsql_command: execute an arbitrary query in database
+  
+For additional docs look project's wiki: https://github.com/rtshome/ansible_pgsql/wiki
 
 
 Requirements
@@ -26,7 +28,12 @@ Dependencies
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Sample playbook that:
+- creates the table `config` in `acme` database
+- ensures that a row is present in `config` table
+- performs a SELECT query on `config` and stores results in `query` var
+- execute a command removing all records in `logs` table
+
 
     - hosts: servers
       tasks:
@@ -60,6 +67,7 @@ Including an example of how to use your role (for instance, with variables passe
             query: "SELECT * FROM config WHERE env = %(env)s
             parameters:
               env: production 
+          register: query
 
         - postgresql_command:
             database: acme
