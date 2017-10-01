@@ -77,7 +77,7 @@ options:
             - absent
     columns:
         description:
-            - List of objects with name, type and null
+            - List of objects with name, type and null keys
         required: true
     primary_key:
         description:

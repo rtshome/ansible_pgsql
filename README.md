@@ -2,10 +2,10 @@ pgsql
 =========
 
 Provides four new ansible modules for Postgresql:
-  - pgsql_table: ensure that a table is present (or absent) in database
-  - pgsql_row: ensure that a row is present (or absent) in a table
-  - pgsql_query: execute an arbitrary query in database and return results
-  - pgsql_command: execute an arbitrary query in database
+  - postgresql_table: ensure that a table is present (or absent) in database
+  - postgresql_row: ensure that a row is present (or absent) in a table
+  - postgresql_query: execute an arbitrary query in database and return results
+  - postgresql_command: execute an arbitrary query in database
   
 For additional docs look project's wiki: https://github.com/rtshome/ansible_pgsql/wiki
 
@@ -64,7 +64,7 @@ Sample playbook that:
 
         - postgresql_query:
             database: acme
-            query: "SELECT * FROM config WHERE env = %(env)s
+            query: SELECT * FROM config WHERE env = %(env)s
             parameters:
               env: production 
           register: query
@@ -73,7 +73,7 @@ Sample playbook that:
             database: acme
             command: "TRUNCATE logs"
       roles:
-         - { role: pgsql }
+         - rtshome.pgsql
 ```
 
 License

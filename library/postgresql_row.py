@@ -30,14 +30,12 @@ DOCUMENTATION = '''
 ---
 module: postgresql_row
 
-short_description: |
-                    ensure that there are exactly n rows returned by query.
-                    If not execute the command query to add the missing rows
+short_description: add or remove a row from PostgreSQL table
 
 version_added: "2.3"
 
 description:
-    - "ensure that there are exactly n rows returned by query. If not execute the command query to add the missing rows"
+    - "add or remove a row from PostgreSQL table"
 
 options:
     database:

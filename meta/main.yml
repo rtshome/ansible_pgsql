@@ -1,7 +1,8 @@
 galaxy_info:
   author: Denis Gasparin
   description: >
-            Add four modules to interact with PostgreSQL DBMS: pgsql_table, pgsql_row, pgsql_query, pgsql_command.
+            Add four modules to interact with PostgreSQL DBMS: postgresql_table, postgresql_row, postgresql_query,
+            postgresql_command.
   company: Smart Solutions
   license: BSD
 
@@ -14,6 +15,7 @@ galaxy_info:
     - query
     - sql
     - command
+    - table
   platforms:
     - name: EL
       versions:
