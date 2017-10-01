@@ -34,7 +34,7 @@ Sample playbook that:
 - performs a SELECT query on `config` and stores results in `query` var
 - execute a command removing all records in `logs` table
 
-
+```yaml
     - hosts: servers
       tasks:
         - postgresql_table:
@@ -74,6 +74,7 @@ Sample playbook that:
             command: "TRUNCATE logs"
       roles:
          - { role: pgsql }
+```
 
 License
 -------
