@@ -2,7 +2,6 @@
 try:
     import psycopg2
     import psycopg2.extras
-    from psycopg2 import sql
 except ImportError:
     postgresqldb_found = False
 else:
