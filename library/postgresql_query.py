@@ -2,6 +2,7 @@
 try:
     import psycopg2
     import psycopg2.extras
+    import json
 except ImportError:
     postgresqldb_found = False
 else:
@@ -29,7 +30,7 @@ module: postgresql_query
 
 short_description: execute a query in a PostGreSQL database and return the results
 
-version_added: "2.3"
+version_added: "2.4"
 
 description:
     - "execute a query in a PostGreSQL database and return the results"
@@ -136,24 +137,33 @@ def run_module():
     try:
         cursor = connect(database, prepare_connection_params(module.params))
         cursor.connection.autocommit = False
+
+        if not parameters:
+            parameters = []
+
         cursor.execute(module.params["query"], parameters)
 
         module.exit_json(
             changed=True,
             executed_query=cursor.query,
-            rows=cursor.fetchall(),
-            rowCount=cursor.rowcount
+            # Json encoding/decoding is needed because RealDictCursor is not handled correctly
+            # by module.exit_json in ansible 2.4
+            rows=json.loads(json.dumps(cursor.fetchall())),
+            row_count=cursor.rowcount
         )
 
     except psycopg2.ProgrammingError:
         e = get_exception()
-        module.fail_json(msg="database error: the query did not produce any resultset, %s" % to_native(e))
+        module.fail_json(
+            msg="database error: the query did not produce any resultset, %s" % to_native(e),
+            exception=traceback.format_exc()
+        )
     except psycopg2.DatabaseError:
         e = get_exception()
         module.fail_json(msg="database error: %s" % to_native(e), exception=traceback.format_exc())
     except TypeError:
         e = get_exception()
-        module.fail_json(msg="parameters error: %s" % to_native(e))
+        module.fail_json(msg="parameters error: %s" % to_native(e), exception=traceback.format_exc())
     finally:
         if cursor:
             cursor.connection.rollback()
